@@ -2,10 +2,11 @@
 /* El objeto se construye con el componente y la ruta */
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import RouterProtected from "../components/RouterProtected";
 export let enrutador = [
   {
     path: '/home',
-    element: <Home />
+    element: <RouterProtected proteger={<Home/>} />
   },
   {
     path: '/',
