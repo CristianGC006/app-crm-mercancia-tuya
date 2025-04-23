@@ -6,7 +6,7 @@ import {
   generarToken,
 } from "../helpers/funciones";
 import "./Login.css";
-let urlUsuarios = "https://back-json-server-tuya-14tp.onrender.com/usuarios";
+let urlUsuarios = "https://backjsonservertuya.onrender.com/users";
 
 function Login() {
   const [getName, setName] = useState("");
@@ -35,6 +35,7 @@ function Login() {
     if (buscarUsuario()) {
       let tokenAcceso = generarToken();
       localStorage.setItem("token", tokenAcceso);
+      localStorage.setItem("usuario", JSON.stringify(buscarUsuario()));
       alertaRedireccion(
         redireccion,
         "Bienvenido",
