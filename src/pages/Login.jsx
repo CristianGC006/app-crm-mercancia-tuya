@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   alertaGenerica,
@@ -6,13 +6,33 @@ import {
   generarToken,
 } from "../helpers/funciones";
 import "./Login.css";
+let urlUsuarios = "https://back-json-server-tuya-14tp.onrender.com/usuarios";
+
 function Login() {
   const [getName, setName] = useState("");
   const [getPassword, setPasword] = useState("");
+  const [usuarios, setUsuarios] = useState([]);
   let redireccion = useNavigate();
 
-  function iniciarSesion(user, password) {
-    if (user === "admin" && password === "admin") {
+  function getUsuarios() {
+    fetch(urlUsuarios)
+      .then((response) => response.json())
+      .then((data) => setUsuarios(data))
+      .catch((error) => console.log(error));
+  }
+
+  useEffect(() => {
+    getUsuarios();
+  }, []);
+
+  function buscarUsuario() {
+    let user = usuarios.find(
+      (item) => getName == item.user && getPassword == item.password
+    );
+    return user;
+  }
+  function iniciarSesion() {
+    if (buscarUsuario()) {
       let tokenAcceso = generarToken();
       localStorage.setItem("token", tokenAcceso);
       alertaRedireccion(
@@ -42,7 +62,7 @@ function Login() {
         className="input"
         placeholder="Password"
       />
-      <button onClick={() => iniciarSesion(getName, getPassword)} type="button">
+      <button onClick={iniciarSesion} type="button">
         Submit
       </button>
     </form>
