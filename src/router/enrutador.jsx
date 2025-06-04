@@ -6,6 +6,7 @@ import RutaProtegida from "../components/RutaProtegida";
 import Register from "../pages/Register";
 import CreateDelivery from "../pages/CreateDelivery";
 import DeliveyList from "../pages/DeliveryList";
+import DeliveryEdit from "../pages/DeliveryEdit";
 export let enrutador = [
   {
     path: '/home/',
@@ -17,6 +18,9 @@ export let enrutador = [
       },{
         path:"listar-envio",
         element:<DeliveyList/>
+      },{
+        path:"editar-envio/:id",
+        element:<DeliveryEdit/>
       }
     ]
   },
