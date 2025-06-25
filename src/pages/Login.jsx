@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   alertaGenerica,
   alertaRedireccion,
   generarToken,
 } from "../helpers/funciones";
 import "./Login.css";
-let urlUsuarios = "https://back-json-server-tuya-14tp.onrender.com/usuarios";
+let urlUsuarios = "https://backjsonservertuya.onrender.com/users";
 
 function Login() {
   const [getName, setName] = useState("");
@@ -55,7 +56,7 @@ function Login() {
         onChange={(e) => setName(e.target.value)}
         type="text"
         className="input"
-        placeholder="Name"
+        placeholder="Tu Usuario"
       />
       <input
         onChange={(e) => setPasword(e.target.value)}
@@ -66,6 +67,7 @@ function Login() {
       <button onClick={iniciarSesion} type="button">
         Submit
       </button>
+      <Link to={"/register"}>No tienes cuenta ?</Link>
     </form>
   );
 }
